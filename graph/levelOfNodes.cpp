@@ -47,6 +47,42 @@ class Solution
 	}
 };
 
+
+/*
+class Solution
+{
+	public:
+	//Function to find the level of node X.
+	int nodeLevel(int V, vector<int> adj[], int X) 
+	{
+	    //bfs //level order traversal in tree+visited array to not visit again
+	    bool visited[V]={false};
+	    queue<int> nodes;
+	    nodes.push(0);
+	    visited[0]=true;
+	    int level=0;
+	    while(!nodes.empty()){
+	        int sz=nodes.size();
+	        while(sz>0){
+	            sz--;
+	            int node=nodes.front();
+	            nodes.pop();
+	            for(const int &x:adj[node]){
+	                if(!visited[x]){
+	                    if(x==X)
+	                        return level+1;
+	                    visited[x]=true;
+	                    nodes.push(x);
+	                }
+	            }
+	        }
+	        level++;
+	    }
+	    return -1;
+	    
+	}
+};
+*/
 // { Driver Code Starts.
 
 

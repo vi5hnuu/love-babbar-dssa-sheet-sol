@@ -17,8 +17,8 @@
 using namespace std;
 
  // } Driver Code Ends
-class Solution {
 /*
+class Solution {
   private:
   void dfsOfGraph(int V, vector<int> *&adj,vector<bool> &visited,vector<int> &res,int source) {
         //cout<<visited[source];
@@ -37,7 +37,7 @@ class Solution {
     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
         vector<bool> visited(V,false);
         vector<int> res;
-        for(int i=0;i<V;i++){
+        for(int i=0;i<V;i++){//if graph given is disconnected
             if(!visited[i])
             dfsOfGraph(V,adj,visited,res,i);
         }

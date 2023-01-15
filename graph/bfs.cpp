@@ -34,6 +34,33 @@
 //         return res;
 //     }
 
+/*
+In above code duplicate node are also pushed into the queue->analyze it
+
+optimized -> 
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        bool visited[V]={false};
+        queue<int> nodes;
+        nodes.push(0);
+        visited[0]=true;
+        vector<int> res;
+        while(!nodes.empty()){
+            int node=nodes.front();
+            nodes.pop();
+            res.push_back(node);
+            for(const int &x:adj[node]){
+                if(!visited[x]){
+                  nodes.push(x);
+                  visited[x]=true;
+                }
+                    
+            }
+        }
+        return res;
+    }
+*/
+
+/*
 vector<int> bfsOfGraph(int V, vector<int> adj[]) {
         bool visited[V]={false};
         queue<int> nodes;
@@ -60,3 +87,29 @@ vector<int> bfsOfGraph(int V, vector<int> adj[]) {
         }
         return res;
     }
+*/
+    /*
+    class Solution {
+  public:
+    // Function to return Breadth First Traversal of given graph.
+    vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        vector<int> res;
+        bool visited[V]={false};
+        res.push_back(0);
+        visited[0]=true;
+        int ind=0;
+        while(ind<res.size()){
+            const vector<int> &adjV=adj[res[ind]];
+            for(int i=0;i<adjV.size();i++){
+                if(!visited[adjV[i]]){
+                    res.push_back(adjV[i]);
+                    visited[adjV[i]]=true;
+                }
+                
+            }
+            ind++;
+        }
+        return res;
+    }
+};
+    */

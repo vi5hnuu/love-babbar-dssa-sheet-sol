@@ -33,7 +33,7 @@ class Solution {
         }
         return false;
     }
-        */
+*/
     public:
     //using kahn's algo (topological)
     bool isCyclic(int V, vector<int> adj[]) {
@@ -69,6 +69,82 @@ class Solution {
             return true;//dependencies cannot be zero
     }
 };
+
+/*
+class Solution {
+    bool dfs(int source,vector<int> adj[],bool visited[],bool stcktrc[]){
+        visited[source]=true;
+        stcktrc[source]=true;
+        for(const int &x:adj[source]){
+            if(!visited[x]){
+              if(dfs(x,adj,visited,stcktrc)){
+                    return true;
+                }  
+            }else if(stcktrc[x]){//visited in same tree
+                return true;
+            }
+        }
+        stcktrc[source]=false;
+        return false;
+    }
+  public:
+    // Function to detect cycle in a directed graph.
+    bool isCyclic(int V, vector<int> adj[]) {
+        bool visited[V]={false};
+        bool stcktrc[V]={false};//is the vertext in same stack trace [detect back edge]
+        for(int i=0;i<V;i++){//its directed graph so  0->1<-2 is 2 graph as 1 has no adj vertex
+            if(!visited[i]){
+                if(dfs(i,adj,visited,stcktrc)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
+*/
+
+/*
+class Solution {
+    private:
+    vector<int> getIndegree(int v,vector<int> adj[]){
+        vector<int> indegrees(v,0);
+        for(int i=0;i<v;i++){
+            for(int j=0,cols=adj[i].size();j<cols;j++){
+                indegrees[adj[i][j]]++;
+            }
+        }
+        return indegrees;
+    }
+    int topoSort(int V, vector<int> adj[]) {
+	    int res=0;
+	    vector<int> indegrees=getIndegree(V,adj);
+	    queue<int> nodes;
+	    for(int i=0;i<V;i++){
+	        if(indegrees[i]==0){
+	            nodes.push(i);
+	        }
+	    }
+	    while(!nodes.empty()){
+	        int node=nodes.front();
+	        nodes.pop();
+	        res++;
+	        for(const int &child:adj[node]){
+	                indegrees[child]--;
+    	            if(indegrees[child]==0){
+    	               nodes.push(child);
+    	            }
+	        }
+	    }
+	    return res;
+	}
+  public:
+    // Function to detect cycle in a directed graph.
+    bool isCyclic(int V, vector<int> adj[]) {
+        return V!=topoSort(V,adj);
+    }
+};
+*/
 
 // { Driver Code Starts.
 

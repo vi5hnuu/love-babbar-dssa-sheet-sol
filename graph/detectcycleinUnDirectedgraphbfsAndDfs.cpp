@@ -22,7 +22,7 @@ class Solution {
                 }
                 else{
                     if(child!=par)
-                    return true;
+                        return true;
                 }
             }
         }

@@ -1,3 +1,91 @@
+//this algo work when no cycle in graph  because of dependencies
+
+// BFS based -> kahns algo
+/*
+class Solution
+{
+    private:
+    vector<int> getIndegree(int v,vector<int> adj[]){
+        vector<int> indegrees(v,0);
+        for(int i=0;i<v;i++){
+            for(int j=0,cols=adj[i].size();j<cols;j++){
+                indegrees[adj[i][j]]++;
+            }
+        }
+        return indegrees;
+    }
+	public:
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) {
+	    vector<int> res;
+	    bool visited[V]={false};
+	    vector<int> indegrees=getIndegree(V,adj);
+	    queue<int> nodes;
+	    for(int i=0;i<V;i++){
+	        if(indegrees[i]==0){
+	            nodes.push(i);
+	            visited[i]=true;
+	        }
+	    }
+	    while(!nodes.empty()){
+	        int node=nodes.front();
+	        nodes.pop();
+	        res.push_back(node);
+	        for(const int &child:adj[node]){
+	            if(!visited[child]){
+	                indegrees[child]--;
+    	            if(indegrees[child]==0){
+    	               nodes.push(child);
+    	               visited[child]=true; 
+    	            }
+	            }
+	        }
+	    }
+	    return res;
+	}
+};
+*/
+/*
+class Solution
+{
+    private:
+    vector<int> getIndegree(int v,vector<int> adj[]){
+        vector<int> indegrees(v,0);
+        for(int i=0;i<v;i++){
+            for(int j=0,cols=adj[i].size();j<cols;j++){
+                indegrees[adj[i][j]]++;
+            }
+        }
+        return indegrees;
+    }
+	public:
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) {
+	    vector<int> res;
+	    vector<int> indegrees=getIndegree(V,adj);
+	    queue<int> nodes;
+	    for(int i=0;i<V;i++){
+	        if(indegrees[i]==0){
+	            nodes.push(i);
+	        }
+	    }
+	    while(!nodes.empty()){
+	        int node=nodes.front();
+	        nodes.pop();
+	        res.push_back(node);
+	        for(const int &child:adj[node]){
+	                indegrees[child]--;
+    	            if(indegrees[child]==0){
+    	               nodes.push(child);
+    	            }
+	        }
+	    }
+	    return res;
+	}
+};
+*/
+
+
 // Given a Directed Acyclic Graph (DAG) with V vertices and E edges, Find any Topological Sorting of that Graph.
 // { Driver Code Starts
 #include <bits/stdc++.h>
