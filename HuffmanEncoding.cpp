@@ -68,6 +68,27 @@ void printHuffmanEncoding(const Node *root,string path="",Direction parDir=Direc
   printHuffmanEncoding(root->right,path+pathSlug,Direction::LEFT);
 }
 
+void encodedTextMap(const Node *root,vector<string> &paths,string path="",Direction parDir=Direction::STATIC){//parDir is dir of par wrt child
+  if(!root){
+    return;
+  }
+  char pathSlug=' ';
+  if(parDir!=Direction::STATIC){
+    if(parDir==Direction::RIGHT){
+      pathSlug='0';
+    }else{
+      pathSlug='1';
+    }
+  }
+  if(!root->left && !root->right){
+    paths[root->c-'A']=path+pathSlug;
+    return;
+  } 
+
+  encodedTextMap(root->left,paths,path+pathSlug,Direction::RIGHT);
+  encodedTextMap(root->right,paths,path+pathSlug,Direction::LEFT);
+}
+
 int main(){
   string encodeStr;
   cin >> encodeStr;
@@ -83,6 +104,10 @@ int main(){
       unprocessedUnits.push({freqCaps[i],static_cast<char>(i+'A')});
     }
   }
+
+  //This will store the encoding of each different character in all caps string
+ vector<string> encodedMap(unprocessedUnits.size(),"");
+
 
   //////Logs////////working
   // while(!unprocessedUnits.empty()){
@@ -175,4 +200,11 @@ int main(){
   10     B
   11     C
   */
+
+ encodedTextMap(tree,encodedMap);
+  string encodedString="";
+  for(const char &c:encodeStr){
+    encodedString += encodedMap[c-'A'];
+  }
+  cout<<encodedString<<endl;
 }
