@@ -134,7 +134,7 @@ int main(){
         10 A
   */
   //////Logs////////
-  while(unprocessedUnits.size()>2){
+  while(unprocessedUnits.size()>1){
     if(huffmanTree.empty()){
         pair<int,char> fmin=unprocessedUnits.top();
         unprocessedUnits.pop();
@@ -169,6 +169,12 @@ int main(){
     if(!tree){
       tree=huffmanTree.top();
       huffmanTree.pop();
+      if(huffmanTree.empty() && !unprocessedUnits.empty()){//eg ABC 
+         pair<int,char> mn=unprocessedUnits.top();
+         unprocessedUnits.pop();
+          Node *nd=new Node(mn.first,mn.second);
+          tree= *tree+*nd;
+      }
     }else{
       if(!unprocessedUnits.empty()){//it can have atmost one pair
         pair<int,char> mn=unprocessedUnits.top();
@@ -185,6 +191,10 @@ int main(){
         huffmanTree.pop();
       }
     }
+  }
+
+  if(!unprocessedUnits.empty()){//implies user passed single character sequence
+    cout<<"Compression not possible for "<<encodeStr<<endl;
   }
 
   // inorderTree(tree);
@@ -217,7 +227,7 @@ int main(){
   for(const char &c:encodeStr){
     encodedString += encodedMap[c-'A'];
   }
-  cout<<encodedString<<endl;
+  cout<<"ENCODED TEXT : "<<encodedString<<endl;
 
 
   cout<<"\n-Releasing Resources-\n";
