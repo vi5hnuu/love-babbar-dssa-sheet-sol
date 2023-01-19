@@ -89,6 +89,17 @@ void encodedTextMap(const Node *root,vector<string> &paths,string path="",Direct
   encodedTextMap(root->right,paths,path+pathSlug,Direction::LEFT);
 }
 
+
+void releaseMemory(const Node *root){
+    if(!root){
+      return;
+    }
+    releaseMemory(root->left);
+    releaseMemory(root->right);
+    cout<<"releasing memory for node with value : "<<root->val<<endl;
+    delete root;
+}
+
 int main(){
   string encodeStr;
   cin >> encodeStr;
@@ -207,4 +218,9 @@ int main(){
     encodedString += encodedMap[c-'A'];
   }
   cout<<encodedString<<endl;
+
+
+  cout<<"\n-Releasing Resources-\n";
+  releaseMemory(tree);
+  tree=nullptr;
 }
