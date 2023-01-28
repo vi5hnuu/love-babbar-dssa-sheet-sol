@@ -76,3 +76,51 @@ public:
         return {findex,sindex};
     }
 };
+//////////////////////////////////////////////////////////////
+
+class Solution {
+    int lbins(const vector<int> &nums,int target){
+        int low=0,high=nums.size()-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(nums[mid]==target){
+                if(mid==0 || nums[mid-1]!=target)
+                    return mid;
+                else
+                    high=mid-1;
+                    
+            }else if(nums[mid]<target){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+    int rbins(const vector<int> &nums,int target,int lw){
+        int low=lw,high=nums.size()-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(nums[mid]==target){
+                if(mid==nums.size()-1 || nums[mid+1]!=target)
+                    return mid;
+                else
+                    low=mid+1;
+                    
+            }else if(nums[mid]<target){
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int findex=lbins(nums,target);
+        if(findex==-1)
+            return {-1,-1};
+        int sindex=rbins(nums,target,findex);
+        return {findex,sindex};
+    }
+};

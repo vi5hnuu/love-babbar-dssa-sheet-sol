@@ -132,4 +132,39 @@ public:
     }
 };
 
+/////////////////////////////////////////////
+class Solution {
+private:
+    double knightRemainInsideMoves(int n, int moves, int row, int column,vector<vector<double>> &memo) {
+        if(moves==0){
+            if(row<0 || column<0 || row>=n || column>=n){
+                return 0;
+            }else{
+                return 1;;
+            }
+        }
+        if(row<0 || column<0 || row>=n || column>=n){
+                return 0;
+        }
+        if(memo[row*n+column][moves]!=-1.0){
+            return memo[row*n+column][moves];
+        }
+        double total=memo[row*n+column][moves]=knightRemainInsideMoves(n,moves-1,row-2,column+1,memo)+
+                knightRemainInsideMoves(n,moves-1,row-2,column-1,memo)+
+                knightRemainInsideMoves(n,moves-1,row+2,column+1,memo)+
+                knightRemainInsideMoves(n,moves-1,row+2,column-1,memo)+
+                knightRemainInsideMoves(n,moves-1,row+1,column-2,memo)+
+                knightRemainInsideMoves(n,moves-1,row-1,column-2,memo)+
+                knightRemainInsideMoves(n,moves-1,row+1,column+2,memo)+
+                knightRemainInsideMoves(n,moves-1,row-1,column+2,memo);
+        return total;
+    }
+public:
+    double knightProbability(int n, int k, int row, int column) {
+        vector<vector<double>> memo(n*n,vector<double>(k+1,-1.0));
+        double insideCount=knightRemainInsideMoves(n,k,row,column,memo);
+        double totalOcc=pow(8,k);
+        return insideCount/totalOcc;
+    }
+};
 */

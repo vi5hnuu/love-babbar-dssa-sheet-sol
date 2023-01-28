@@ -88,13 +88,13 @@ public:
                 // cout<<matrix[j][ec]<<"*";
             }
             ec--;
-            //to left
+            //to left [the row we traversed right cannot be the row we traversed left]
             for(int k=ec;er!=(sr-1) && k>=sc;k--){
                 spiralOrder.push_back(matrix[er][k]);
                 // cout<<matrix[er][k]<<"+";
             }
             er--;
-            //to up
+            //to up [the column we traversed down cannot be the column we traversed up]
             for(int l=er;sc!=(ec+1) && l>=sr;l--){
                 spiralOrder.push_back(matrix[l][sc]);
                 // cout<<matrix[l][sc]<<"-";

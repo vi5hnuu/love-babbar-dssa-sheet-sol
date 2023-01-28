@@ -112,8 +112,6 @@ Hope you got the point
 //sol 3 | 2 pointer
 
 //solution 3 
-
-
 class Solution {
 public:
     int trap(vector<int>& height) {
