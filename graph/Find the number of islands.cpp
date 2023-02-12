@@ -74,3 +74,82 @@ class Solution {
         return islands;
     }
 };
+//////////////////////////////////////////////////////////////
+class Solution {
+    private:
+    void traverseIsland(vector<vector<char>> &grid,int i,int j){
+        if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j]=='0'){
+            return;
+        }
+        
+         grid[i][j]='0';//convert it to water
+         traverseIsland(grid,i-1,j);
+         traverseIsland(grid,i,j+1);
+         traverseIsland(grid,i,j-1);
+         traverseIsland(grid,i+1,j);
+         traverseIsland(grid,i-1,j-1);
+         traverseIsland(grid,i-1,j+1);
+         traverseIsland(grid,i+1,j-1);
+         traverseIsland(grid,i+1,j+1);
+       
+    }
+  public:
+    // Function to find the number of islands.
+    int numIslands(vector<vector<char>>& grid) {//grid is like adjacency list[not exactly as it contain zero]
+        int islands=0;
+        
+        int rows=grid.size(),cols=grid[0].size();
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(grid[i][j]!='0'){
+                    islands++;
+                    traverseIsland(grid,i,j);
+                }
+            }
+        }
+        return islands;
+    }
+};
+
+
+class Solution {
+    private://bfs
+    void traverseIsland(vector<vector<char>> &grid,int i,int j,const int &r,const int &c){
+        queue<pair<int,int>> pq;
+        pq.push({i,j});
+        grid[i][j]='0';
+        
+        //adj
+        while(!pq.empty()){
+            auto pos=pq.front();
+            pq.pop();
+            
+            for(int x=-1;x<=1;x++){
+                for(int y=-1;y<=1;y++){
+                    int xi=pos.first+x;
+                    int yi=pos.second+y;
+                    if(xi>=0 && xi<r && yi>=0 && yi<c && grid[xi][yi]=='1'){
+                        grid[xi][yi]='0';
+                        pq.push({xi,yi});
+                    }
+                }
+            }
+        }
+    }
+  public:
+    // Function to find the number of islands.
+    int numIslands(vector<vector<char>>& grid) {//grid is like adjacency list[not exactly as it contain zero]
+        int islands=0;
+        
+        int rows=grid.size(),cols=grid[0].size();
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(grid[i][j]!='0'){
+                    islands++;
+                    traverseIsland(grid,i,j,rows,cols);
+                }
+            }
+        }
+        return islands;
+    }
+};

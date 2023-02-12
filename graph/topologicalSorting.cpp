@@ -1,5 +1,8 @@
 //this algo work when no cycle in graph  because of dependencies
 
+
+//cycle detected in directed using kahna def is not possible [we need to maintain path sack instead we can use simple dfs with path stack why store topo in stack]
+//bfs for detected works find[kahns algo]
 // BFS based -> kahns algo
 /*
 class Solution
@@ -161,7 +164,6 @@ class Solution
 	   }
 	   return res;
 	}
-	
 };
 
 // { Driver Code Starts.

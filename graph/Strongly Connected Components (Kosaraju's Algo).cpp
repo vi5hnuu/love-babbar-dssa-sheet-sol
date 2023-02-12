@@ -38,6 +38,10 @@ Constraints:
 Sum of E over all testcases will not exceed 25*106
 */
 
+
+//kosarajs algor for directed graph because for undirected we can simple do dfs multiple times to get connected components
+
+//but best algo is tarjans algo which does its work in single dfs (directed graphs)
 void dfs(int source,int V,const vector<int> adj[],bool visited[]){
     visited[source]=true;
     for(int i=0;i<adj[source].size();i++){

@@ -45,33 +45,99 @@ class Solution {
     }
     */
     
-    private:
-  void dfsOfGraph(int V, vector<int> *&adj,vector<bool> &visited,vector<int> &res,int source) {
-        //cout<<visited[source];
-            res.push_back(source);
-            for(const int &child:adj[source]){
-            if(!visited[child]){
-                visited[child]=true;
-                dfsOfGraph(V,adj,visited,res,child);
-            }
-        }
+//     private:
+//   void dfsOfGraph(int V, vector<int> *&adj,vector<bool> &visited,vector<int> &res,int source) {
+//         //cout<<visited[source];
+//             res.push_back(source);
+//             for(const int &child:adj[source]){
+//             if(!visited[child]){
+//                 visited[child]=true;
+//                 dfsOfGraph(V,adj,visited,res,child);
+//             }
+//         }
         
-  }
+//   }
+//   public:
+//     // Function to return a list containing the DFS traversal of the graph.
+//     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+//         vector<bool> visited(V,false);
+//         vector<int> res;
+//         for(int i=0;i<V;i++){
+//             if(!visited[i]){
+//             visited[i]=true;
+//             dfsOfGraph(V,adj,visited,res,i);
+//             }
+//         }
+//         return res;
+//     }
+// };
+
+/////////////////////////////////////////
+/*
+eg
+    0->1 2
+    1->0 3 4
+    2->0 3
+    3->1 2
+    4->1 5
+    5->4
+*/
+class Solution {
   public:
     // Function to return a list containing the DFS traversal of the graph.
     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        stack<int> stck;
         vector<bool> visited(V,false);
+        stck.push(0);
+        visited[0]=true;
         vector<int> res;
-        for(int i=0;i<V;i++){
-            if(!visited[i]){
-            visited[i]=true;
-            dfsOfGraph(V,adj,visited,res,i);
+        while(!stck.empty()){
+            int tp=stck.top();
+            stck.pop();
+            res.push_back(tp);
+            for(int i=adj[tp].size()-1;i>=0;i--){
+                //can from zero also but gfg output show we should from end
+                //wrong XXXXXXXXXXXXXXXXXXXXXXXXXX knw why ?
+                int neighbour=adj[tp][i];
+                if(!visited[neighbour]){
+                    visited[neighbour]=true; //this shouldn't happen...
+                    stck.push(neighbour);
+                }
             }
         }
         return res;
     }
 };
 
+class Solution {
+  public:
+    // Function to return a list containing the DFS traversal of the graph.
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        stack<int> stck;
+        vector<bool> visited(V,false);
+        stck.push(0);
+        vector<int> res;
+        while(!stck.empty()){
+            int tp=stck.top();
+            stck.pop();
+            
+            if(!visited[tp]){
+                res.push_back(tp);
+                visited[tp]=true;
+            }
+            for(int i=adj[tp].size()-1;i>=0;i--){
+                //can from zero also but gfg output show we should from end
+                //CORRECT
+                int neighbour=adj[tp][i];
+                if(!visited[neighbour]){
+                    stck.push(neighbour);
+                }
+            }
+        }
+        return res;
+    }
+};
+///////////////////////////////////////////
 
 // { Driver Code Starts.
 int main() {

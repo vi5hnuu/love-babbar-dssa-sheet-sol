@@ -26,3 +26,6 @@ class Solution {
             cout<<"distance of node "<<x[0]<<" from "<<0<<" is "<<x[1]<<endl;
     }
 };
+/*
+in case graph is disconnected we need bfs for nonvisited and dist is infinity
+*/

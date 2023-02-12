@@ -57,6 +57,7 @@ class Solution
         bool MST[V]={false};
         int mWeight[V];
         fill(mWeight,mWeight+V,INT_MAX);
+        
         mWeight[0]=0;
         int ans=0;
         for(int i=0;i<V;i++){

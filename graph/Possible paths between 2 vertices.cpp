@@ -58,7 +58,58 @@ Expected Auxiliary Space: O(V)
 /*
 
 
-
+/*
+class Solution {
+  private:
+  void pathCountDfs(int source,const int &dest,vector<int> adj[],bool visited[],int &count){
+      
+      if(source==dest){
+          count++;
+          return;
+      }
+      visited[source]=true;
+      for(const int &neighbour:adj[source]){
+          if(!visited[neighbour]){
+              pathCountDfs(neighbour,dest,adj,visited,count);
+          }
+      }
+      visited[source]=false;
+  }
+  public:
+    // Function to count paths between two vertices in a directed graph.
+    int countPaths(int V, vector<int> adj[], int source, int destination) {
+        bool visited[V]={false};
+        int count=0;
+        pathCountDfs(source,destination,adj,visited,count);
+        return count;
+    }
+};
+*/
+class Solution {
+  public:
+    // Function to count paths between two vertices in a directed graph.
+    int countPaths(int V, vector<int> adj[], int source, int destination) {
+        // Code here
+       queue<vector<int>> q,res;
+       q.push({source});
+       
+       while(q.empty() == false) {
+           vector<int> a = q.front(); q.pop();
+           int n = a.size();
+           if(a[n-1] == destination) {
+               res.push(a);
+           }
+           else{
+               for(auto x:adj[a[n-1]]) {
+                       a.push_back(x);
+                       q.push(a);
+                       a.pop_back();
+               }
+           }
+       }
+       return res.size();
+    }
+};
 
 
 

@@ -63,39 +63,44 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    /*
-    vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
-    {
-        bool MST[V]={false};
-        vector<int> key(V,INT_MAX);
-        key[S]=0;
-        
-        for(int i=0;i<V;i++){
+//     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S){
+//         // Code here
+//        vector<int> dist(V, INT_MAX);
+//        vector<int> fin(V, false);
+//        dist[S] = 0;
+       
+//         for(int i=0;i<V-1;i++){
+//             //get minimum node from non-finalized
+//             int u=-1;
+//             for(int j=0;j<V;j++){
+//                 if(!fin[j] && (u==-1 || dist[j]<dist[u])){
+//                     u=j;
+//                 }
+//             }
+//             fin[u]=true;
             
-            int u=-1;
-            for(int j=0;j<V;j++){
-                if(!MST[j] && (u==-1 || key[j]<key[u])){
-                    u=j;
-                }
-            }
-            MST[u]=true;
+//             //relax adjacent
+//             for(auto &ad:adj[u]){
+//                 int v=ad[0];
+//                 int dis=ad[1];
+//                 if(!fin[v] && dist[v]>dist[u]+dis){
+//                     dist[v]=dist[u]+dis;
+//                 }
+//             }
             
-            for(int k=0,len=adj[u].size();k<len;k++){
-                if(!MST[adj[u][k][0]]){
-                    key[adj[u][k][0]]=min(key[adj[u][k][0]],adj[u][k][1]+key[u]);
-                }
-            }
-        }
-        return key;
-    }
-    */
+//         }
+//         return dist;
+        //we do not detected negative edge cycle [as there is no -ve edge cycle for sure as  the ques is of dijkstra and in dijkstra -ve edge weight is not alloweded]
+//    }
     
+
+    //bellmanford's algorithm
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         vector<int> key(V,INT_MAX);
         key[S]=0;
         
-        for(int i=0;i<V-1;i++){
+        for(int i=0;i<V-1;i++){//counter for vertext at edge dist i
             //on every edge -> relax
             for(int j=0;j<V;j++){
                 for(int k=0;k<adj[j].size();k++){
@@ -105,8 +110,9 @@ class Solution
                 }
             }
         }
+
+        //relax one more time if we get different distances there is negative weight cycle[bellman ford]
         
-        //we do not detected negative edge cycle [as there is no -ve edge cycle for sure as  the ques is of dijkstra and in dijkstra -ve edge weight is not alloweded]
         return key;
     }
 };

@@ -3,6 +3,44 @@
 using namespace std;
 
  // } Driver Code Ends
+
+
+ /*
+ //this solution for directed graph cannot work for undirected graph
+//1-2 is always cycle as per belo algo because 1 is in path of 2, 1->2 and this is not.
+class Solution {
+private:
+    bool isCycle(int source,vector<int> *adj,vector<bool> &visited,vector<bool> &pathStack){
+        visited[source]=pathStack[source]=true;
+        
+        for(int neighbour:adj[source]){
+            if(!visited[neighbour]){
+                 if(isCycle(neighbour,adj,visited,pathStack)){
+                    return true;
+                 }
+            }else if(pathStack[neighbour]){
+                return true;
+            }
+        }
+        pathStack[source]=false;
+        return false;
+    }
+public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        vector<bool> visited(V,false);
+        vector<bool> pathStack(V,false);
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                if(isCycle(i,adj,visited,pathStack)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
+ */
 class Solution {
 /*
   private:

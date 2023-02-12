@@ -1,13 +1,13 @@
 // Given a Undirected Graph with V vertices and E edges, Find the level of node X. if X does not exist in the graph then print -1.
 // Note: Traverse the graph starting from vertex 0.
 
-Input:levelOfNode0.jpeg
-X = 4
-Output:levelOfNode1.jpeg
-2
-Explanation:
+// Input:levelOfNode0.jpeg
+// X = 4
+// Output:levelOfNode1.jpeg
+// 2
+// Explanation:
 
-We can clearly see that Node 4 lies at Level 2.
+// We can clearly see that Node 4 lies at Level 2.
 
 // { Driver Code Starts
 #include<bits/stdc++.h>
