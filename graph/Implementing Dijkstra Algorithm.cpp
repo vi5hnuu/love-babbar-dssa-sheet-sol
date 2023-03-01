@@ -63,6 +63,38 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
+    /*
+        vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
+    {
+        // Code here
+       vector<int> dist(V, INT_MAX);
+       vector<int> fin(V, false);
+       dist[S] = 0;
+       
+        for(int i=0;i<V-1;i++){
+            //get minimum node from non-finalized
+            int u=-1;
+            for(int j=0;j<V;j++){
+                if(!fin[j] && (u==-1 || dist[j]<dist[u])){
+                    u=j;
+                }
+            }
+            fin[u]=true;
+            
+            //relax adjacent
+            for(auto &ad:adj[u]){
+                int v=ad[0];
+                int dis=ad[1];
+                if(dist[v]>dist[u]+dis){//!fin[v] &&
+                    dist[v]=dist[u]+dis;
+                }
+            }
+            
+        }
+        return dist;
+   }
+    */
+   ///////////////////////
 //     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S){
 //         // Code here
 //        vector<int> dist(V, INT_MAX);
