@@ -132,7 +132,7 @@ class Solution
         vector<int> key(V,INT_MAX);
         key[S]=0;
         
-        for(int i=0;i<V-1;i++){//counter for vertext at edge dist i
+        for(int i=0;i<V-1;i++){//counter for vertext at edge dist i (Tc = O(V*E))
             //on every edge -> relax
             for(int j=0;j<V;j++){
                 for(int k=0;k<adj[j].size();k++){
